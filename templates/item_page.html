@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Сервер
+{% endblock %}
+
+{% block content %}
+    <div class="gallery-image" style="width: 100%; margin-left: 10%; margin-bottom: 50px; ">
+        <div class="gallery-image" style="width: 40%; display: block; margin-right: 4%;">
+            <img src="{{ Cloth.Image }}" class="pic" sizes="(max-width: 720px) 100vw, (min-width: 720px) 513px">
+        </div>
+        <div style="position: relative" class="layout-aside">
+            <div id="aside-content">
+                <div class="product-hero">
+                    <h1 style="padding-bottom: 12px; font-size: 200%;">{{ Cloth.Name }}</h1>
+                    <div class="price-form" style="display: inline-block">
+                        <span class="current-price">₽{{ Cloth.Price }}</span><br>
+                    </div>
+                </div>
+                <div class="overall-rating" style="margin-top: 17px;">
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star checked"></i>
+                    <span class="text-muted">({{ range(1, 51) | random }})</span>
+                    </a>
+                </div>
+                {% if Cloth.Description != '' %}
+                <div class="nc-promo-box">
+                    {{ Cloth.Description | safe }}
+                </div>
+                {% endif %}
+                <div class="colour-size colour-component">
+                    <div class="grid-row colour-section">
+                        <label class="colour-label">COLOUR:</label>
+                        <span class="colour-product">{{ Cloth.Colour }}</span>
+                    </div>
+                </div>
+            </div>
+            {% if Cloth.Status == 'not available' %}
+            <div style="font-size: 26px; font-family: Consolas; color: red;">
+                недоступен
+            </div>
+            {% endif %}
+            {% if session['loggedIn'] == True and session['isAdmin'] == False and Cloth.Status == 'available' %}
+                <form method="POST" action="{{ url_for('add_to_order', id=Cloth.idCloth) }}">
+                <span class="success"> Размер
+                <input type="number" value="1" name="valuesize" min="1" max="50"
+                                  onkeyup="if(this.value > 50) this.value=50;" required>
+                </span>
+                <span class="success"> Кол-во:
+                           <input type="number" value="1" name="value1" min="1" max="50"
+                                  onkeyup="if(this.value > 50) this.value=50;" required>
+                            </span>
+                <a href="{{ url_for('add_to_order', id = Cloth.idCloth) }}" methods="POST">
+                    <button type="submit" class="btn btn-primary btn-lg px-4 me-md-2">Add to order</button>
+                </a>
+            </form>
+            {% endif %}
+            {% if session['isAdmin'] == True %}
+            {% if Cloth.Status == 'available' %}
+                <a href="{{ url_for('delete', id = Cloth.idCloth) }}" methods="POST">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Скрыть</button>
+                </a>
+            {% else %}
+                <a href="{{ url_for('restore', id = Cloth.idCloth) }}" methods="POST">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Восстановить</button>
+                </a>
+            {% endif %}
+            <a href="{{ url_for('delete_item', id = Cloth.idCloth) }}" methods="POST">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Удалить</button>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

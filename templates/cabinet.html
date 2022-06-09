@@ -1,0 +1,20 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+4fetch - {{ user.Username }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-4">
+        </div>
+        <div class="col-lg-8">
+        <h2 class="display-5 fw-bold lh-1 mb-3">Имя пользователя: {{ user.Username }}</h2>
+        <p class="lead">Имя и Фамилия: {{ user.Name }} {{ user.LastName }}</p>
+        <p class="lead">Почта: {{ user.Email }}</p>
+        <p class="lead">Роль: {{ user.Role }}</p>
+      </div>
+    </div>
+</div>
+{% endblock %}

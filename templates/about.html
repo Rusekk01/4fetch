@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Обо мне
+{% endblock %}
+
+{% block body %}
+    <div class="about-page container" style="padding-bottom: 320px;">
+    <h1>Сотрудниками корпорации Peace Duck являются:</h1>
+    <h2>Пивлов "Лысый" Лексей</h2>
+    <h2>Кнестяпко "Чухан" Русекк</h2>
+        <img src={{ url_for('static', filename='img/duck.png') }} width="400" height="400" style="position: absolute;
+    left: 50%;
+    margin-left: -200px !important; /* 50% of your logo width */
+    display: block;" >
+    </div>
+{% endblock %}

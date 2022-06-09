@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Orders
+{% endblock %}
+
+{% block content %}
+ <main class="form-signin d-flex justify-content-center p-5">
+  <form method="post">
+    <h1 class="h3 mb-3 fw-normal">Введите логин и пароль</h1>
+
+    <div class="form-floating mb-2">
+      <input type="text" class="form-control" id="floatingInput username" name="username" placeholder="Orange">
+      <label for="floatingInput">Логин</label>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="password" class="form-control" id="floatingPassword password" name="password" placeholder="Password">
+      <label for="floatingPassword">Пароль</label>
+    </div>
+
+    <div class="checkbox mb-2">
+      <label>
+        <input type="checkbox" value="remember-me"> Остаться в системе
+      </label>
+    </div>
+    {% for msg in get_flashed_messages() %}
+      <div class="flash">{{msg}}</div>
+    {% endfor %}
+    <a href="/">
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+    </a>
+
+  </form>
+</main>
+{% endblock %}

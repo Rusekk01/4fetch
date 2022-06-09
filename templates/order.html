@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Orders
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <table class="table table-striped">
+            <tr>
+                <th>id Заказа</th>
+                <th>Ordered items</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for Order in Orders[::-1] %}
+                <tr>
+                    <td>{{ Order.idOrder }}</td>
+                    <td>
+                        {% for i in Order.orderitems %}
+                            <div><a style="text-decoration: none"
+                                    href="{{ url_for('itempage', id=i.cloth.idCloth) }}">{{ i.cloth.Name }}</a>(Размер:{{ i.Size }})
+                                x
+                                <span class="success">{{ i.Number }}</span>
+                                {% if Order.Status == 'создается' %}
+                                    <span><a href="{{ url_for('delete_item_from_order', id=i.RowId) }}">
+                                <button type="button" class="button_for_4uxan">X</button>
+                            </a></span>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <td class="success">₽{{ Order.TotalPrice }}</td>
+                    </td>
+                    <td>{{ Order.Status }}</td>
+                    {% if Order.Status == 'создается' %}
+                        <td><a href="{{ url_for('delete_order', id=Order.idOrder) }}">
+                            <button type="button" class="ui-button">Удалить</button>
+                        </a></td>
+                        <td><a href="{{ url_for('pay', id=Order.idOrder) }}">
+                            <button type="button" class="ui-button">Оформить заказ</button>
+                        </a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+{% endblock %}

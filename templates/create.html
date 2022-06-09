@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Orders
+{% endblock %}
+
+{% block body %}
+    <h1 class='container'>Add Item-page</h1>
+    <form class="container" method="post">
+        <label class="form-label">Name</label>
+        <input type="text" name="item-name" id="item-name" class="form-control"><br>
+        <label class="form-label">Image (URL)</label>
+        <input type="text" name="image" id="image" class="form-control"><br>
+        <label class="form-label">Description</label>
+        <textarea name="description" id="description" class="form-control"></textarea><br>
+        <label class="form-label">Colour</label>
+        <input type="text" name="colour" id="colour" class="form-control"><br>
+        <div class="col-md-6">
+            <label for="validationServerUsername" class="form-label">Price</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend3">₽</span>
+                <input type="number" class="form-control" id="price" name="price" aria-describedby="inputGroupPrepend3"
+                       required="">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="validationServer04" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required="">
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+            </select>
+        </div>
+        <hr class="my-4">
+        <div class="co-12">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Add</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+<div class="chrome-main-content--accessible">
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Forfetch</h1>
+                <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>
+                    <a href="/" class="btn btn-primary my-2">Forfetch</a>
+                    <a href="/" class="btn btn-secondary my-2">Forfetch</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="_3-pwX1m">
+        <div class="_2MoInDZ">
+            <div class="_3pQmLlY">
+                <section class="_3YREj-P">
+                    {% for Cloth in items[::-1] %}
+                    {% if Cloth.Status == 'available' or session['isAdmin'] == True %}
+                    <arcicle class="_2qG85dG">
+                        <a class="_3TqU78D" href="{{ url_for('itempage', id=Cloth.idCloth) }}">
+                            <div class="ERlP6Bx">
+                                ::before
+                                <img src="{{ Cloth.Image }}" class="_2r9Zh0W"
+                                     sizes="(min-width: 768px) 317px, 238px">
+                            </div>
+                            <div class="_3WEsAhb">
+                                <div class="_3J74XsK">
+                                    <h2 style="font-size: 18px; font-family: Consolas;">{{ Cloth.Name }}</h2>
+                                </div>
+                            </div>
+                            <p class="_1ldzWib">
+                                    <span class="qU9n4CQ">
+                                        <span style="white-space: nowrap;">
+                                            ₽{{ Cloth.Price }}
+                                        </span>
+                                        {% if Cloth.Status == 'not available' %}
+                                        <span style="font-size: 14px; font-family: Consolas; color: red;">
+                                            недоступен
+                                        </span>
+                                        {% endif %}
+                                    </span>
+                            </p>
+                        </a>
+                    </arcicle>
+                    {% endif %}
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
